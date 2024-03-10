@@ -86,5 +86,3 @@ Every grocery store has some temporary discounts. FreshCart Market needs to cons
 Update the system to include this information in the whole process.
 
 ## How to run
-
-...

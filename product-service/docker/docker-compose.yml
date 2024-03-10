@@ -1,0 +1,47 @@
+version: '3.7'
+
+volumes:
+    database-data:
+        driver: local
+        name: postgres-database-data
+
+networks: 
+    application:
+        driver: bridge
+        
+services:
+## Backend ##############################################
+    products-service:
+        image: products-service
+        build:
+            context: ../
+            dockerfile: docker/Dockerfile
+            target: local_dev
+        environment:
+            DB_SERVICE: "postgres-database:5432"
+            POSTGRES_USER: ${POSTGRES_USER?err}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD?err}
+            POSTGRES_DB: ${POSTGRES_DB?err}
+        volumes:
+            - ../:/home/node/workdir
+        ports:
+            - 3000:3000
+        networks:
+            - application
+        container_name: products-service
+
+## Database ##############################################
+    postgres-database:
+        image: postgres:16.2
+        volumes:
+            - database-data:/var/lib/postgresql/data/
+        environment:
+            POSTGRES_USER: ${POSTGRES_USER?err}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD?err}
+            POSTGRES_DB: ${POSTGRES_DB?err}
+        ports:
+            - 5432:5432
+        networks:
+            - application
+        container_name: postgres-database
+
