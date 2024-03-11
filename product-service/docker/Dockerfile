@@ -8,6 +8,7 @@ USER node:node
 
 COPY docker/run.sh /usr/local/bin/run.sh
 COPY docker/wait-for-it.sh /usr/local/bin/wait-for-it.sh
+COPY docker/test.sh /usr/local/bin/test.sh
 
 EXPOSE 3000
 
@@ -18,8 +19,6 @@ CMD ["run.sh", "development"]
 FROM base as release
 
 COPY --chown=node:node ./ /home/node/workdir
-RUN rm -rf /home/node/workdir/docker
-
 RUN npm ci
 
 CMD ["run.sh", "production"]
@@ -27,5 +26,3 @@ CMD ["run.sh", "production"]
 FROM release as test
 
 RUN npm run test-coverage
-
-

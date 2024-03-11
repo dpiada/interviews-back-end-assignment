@@ -1,7 +1,7 @@
 {
-  "name": "fastify-skeleton",
+  "name": "product-service",
   "version": "1.0.0",
-  "description": "skeleton for use fastify in a project",
+  "description": "service to manage products",
   "main": "index.js",
   "scripts": {
     "start-nodemon": "nodemon --ignore logs/ --ignore test/ index.js",

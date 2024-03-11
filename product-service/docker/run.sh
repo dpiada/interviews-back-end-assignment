@@ -1,7 +1,5 @@
 #!/bin/bash
 
-cd ~/workdir
-
 if [[ $1 = "production" ]]; then
     npm_cmd="start"
 elif [[ $1 = "development" ]]; then
