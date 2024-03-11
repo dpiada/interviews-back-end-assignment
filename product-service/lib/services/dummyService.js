@@ -4,20 +4,20 @@ const fp = require('fastify-plugin');
 
 class DummyService {
 
-    constructor(fastify){
+    constructor(fastify) {
         this.fastify = fastify
     }
 
-    dummyMethod({ message }){
+    dummyMethod({ message }) {
         return message;
     }
 }
 
-function dummyService (fastify, opts, next) {
-  
+function dummyService(fastify, opts, next) {
+
     fastify.decorate('dummyService', new DummyService(fastify));
 
     next();
 }
-  
+
 module.exports = fp(dummyService, { name: 'dummyService' })

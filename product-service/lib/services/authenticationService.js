@@ -4,11 +4,11 @@ const fp = require('fastify-plugin');
 
 class AuthenticationService {
 
-    constructor(fastify){
+    constructor(fastify) {
         this.fastify = fastify
     }
 
-    async decodeJwt({ jwtToken }){
+    async decodeJwt({ jwtToken }) {
         const { jwt } = this.fastify;
 
         const jwtTokenDecoded = await jwt.decode(jwtToken);
@@ -17,11 +17,11 @@ class AuthenticationService {
     }
 }
 
-function authenticationService (fastify, opts, next) {
-  
+function authenticationService(fastify, opts, next) {
+
     fastify.decorate('authenticationService', new AuthenticationService(fastify));
 
     next();
 }
-  
+
 module.exports = fp(authenticationService, { name: 'authenticationService' })

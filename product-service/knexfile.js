@@ -21,6 +21,9 @@ module.exports = {
   migrations: {
     directory: 'lib/database/migrations',
   },
+  seeds: {
+    directory: 'lib/database/seeds',
+  },
   options: {
     verbose: true,
   },

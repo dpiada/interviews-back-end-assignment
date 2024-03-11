@@ -1,0 +1,20 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2021": true
+    },
+    "extends": ["airbnb"],
+    "overrides": [
+    ],
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "rules": {
+        "max-len": ["warn", { "code": 150 }],
+        "class-methods-use-this": "off",
+        "no-param-reassign": "off",
+        "no-restricted-syntax": "off",
+        "no-await-in-loop":"off"
+    }
+}

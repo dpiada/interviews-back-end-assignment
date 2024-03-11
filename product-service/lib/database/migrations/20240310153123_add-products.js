@@ -5,12 +5,13 @@ exports.up = async (knex) => {
     table.increments('id').primary();
     table.string('name').notNullable();
     table.decimal('price').unsigned().notNullable();
-    table.integer('author').unsigned().notNullable();
-    table.string('photo_link');
+    table.string('photo_path');
+    table.integer('quantity').unsigned().notNullable();
+    table.boolean('availability').notNullable();
     table.integer('category_id')
-        .references('categories.id')
-        .onUpdate('CASCADE')
-        .onDelete('CASCADE');
+      .references('categories.id')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
   });
 };
 

@@ -37,7 +37,7 @@ const test = async ({
  *
  * @param {*} description
  * @param {Object} buildRequst
- * e.g { url: "/v1/firmware-manager/health", method: "GET" }
+ * e.g { url: "/v1/health", method: "GET" }
  * @param {Function} testCallback
  */
 const testRoute = async (tests) => {

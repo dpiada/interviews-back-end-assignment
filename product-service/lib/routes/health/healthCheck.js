@@ -7,8 +7,8 @@ module.exports = {
     url: '/v1/health',
     schema: {
         description: 'Get health status',
-        tags: ['health'],    
-    },    
+        tags: ['health'],
+    },
     preHandler: authHandlerSchema.none,
     handler: async (request, reply) => {
 
