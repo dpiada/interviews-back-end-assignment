@@ -15,7 +15,7 @@ class ProductService {
      * @param {Integer} size fiels size of the page
      * @returns 
      */
-    async listAllProduct({ page = 0, size = 10 }) {
+    async listAllProducts({ page = 0, size = 10 }) {
 
         const { product } = this.fastify.objection.models;
 

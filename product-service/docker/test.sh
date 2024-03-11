@@ -1,6 +1,10 @@
 #!/bin/bash
 
 export NODE_ENV=test
+export DB_SERVICE='localhost:5432'
+export POSTGRES_USER=pguser
+export POSTGRES_PASSWORD=pgPassword
+export POSTGRES_DB=products
 
 mkdir -p logs
 date=$(date '+%Y-%m-%d-%H-%M-%S')

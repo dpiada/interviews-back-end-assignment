@@ -44,7 +44,7 @@ module.exports = {
 
     const { page, size } = request.query
 
-    const list = await productService.listAllProduct({ page, size });
+    const list = await productService.listAllProducts({ page, size });
 
     return reply.code(200).send(list);
   }
