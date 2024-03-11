@@ -11,5 +11,7 @@ else
     exit 1
 fi
 
+wait-for-it.sh $DB_SERVICE -t 
+
 echo "Running npm run $npm_cmd"
 npm run $npm_cmd

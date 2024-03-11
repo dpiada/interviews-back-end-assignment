@@ -14,5 +14,7 @@ lab_options="test/"
 lab_options="$lab_options $@"
 
 echo "Running lab $lab_options"
+
+npx knex migrate:latest && npx knex seed:run 
  
 tap $lab_options -o logs/test_$date.log || exit 1

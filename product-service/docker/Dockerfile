@@ -7,6 +7,7 @@ RUN chown node:node /home/node/workdir
 USER node:node
 
 COPY docker/run.sh /usr/local/bin/run.sh
+COPY docker/wait-for-it.sh /usr/local/bin/wait-for-it.sh
 
 EXPOSE 3000
 
