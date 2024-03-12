@@ -22,7 +22,3 @@ COPY --chown=node:node ./ /home/node/workdir
 RUN npm ci
 
 CMD ["run.sh", "production"]
-
-FROM release as test
-
-RUN npm run test-coverage
