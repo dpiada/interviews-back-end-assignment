@@ -25,7 +25,7 @@ module.exports = {
                 id: { type: 'number' },
                 name: { type: 'string' },
                 price: { type: 'number' },
-                photo_path: { type: 'string' },
+                photoPath: { type: 'string' },
                 quantity: { type: 'number' },
                 availability: { type: 'boolean' },
                 category: { type: 'string' }
@@ -44,8 +44,8 @@ module.exports = {
 
     const { page, size } = request.query
 
-    const list = await productService.listAllProducts({ page, size });
-
-    return reply.code(200).send(list);
+    const products = await productService.listAllProducts({ page, size });
+    console.log(products)
+    return reply.code(200).send(products);
   }
 }

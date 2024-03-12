@@ -19,7 +19,7 @@ class ProductService {
 
         const { product } = this.fastify.objection.models;
 
-        const list = await product.query()
+        const products = await product.query()
             .joinRelated('category')
             .select(
                 'products.name',
@@ -31,7 +31,7 @@ class ProductService {
             ).page(page, size);
 
 
-        return list
+        return products
     }
 }
 

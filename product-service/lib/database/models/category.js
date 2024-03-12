@@ -10,7 +10,7 @@ class Category extends Model {
   static get jsonSchema() {
     return {
       type: 'object',
-      required: ['name'],
+      required: ['id', 'name'],
       properties: {
         id: { type: 'integer' },
         name: { type: 'string', minLength: 3 },
