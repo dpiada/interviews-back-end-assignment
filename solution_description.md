@@ -15,7 +15,6 @@ I used the personal skeleton for fastify that you'll find in this [fastify-skele
 
 For this use case I was undecided about SQL or NOSQL databases.
 At the last I decided to use a SQL Database because easiest describe the nature of a grocery market and its relations (categories-product-cart-users).
-##
 With all these relations beetwen these objects I prefer strict relations and dependencies.
 
 

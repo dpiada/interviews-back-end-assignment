@@ -142,7 +142,8 @@ There 2 mode to run this project:
 
 ## API Documentations
 ---
-[Api Documentation](swagger-api.yaml)
+
+- [Api Documentation](swagger-api.yaml)
 
 ## Useful links
 
