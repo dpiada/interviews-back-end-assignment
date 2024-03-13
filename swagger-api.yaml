@@ -5,22 +5,6 @@ info:
   version: 1.0.0
 definitions: {}
 paths:
-  /v1/dummy:
-    get:
-      description: It's only a dummy route
-      tags:
-        - dummy
-      responses:
-        "200":
-          description: Default Response
-  /v1/health:
-    get:
-      description: Get health status
-      tags:
-        - health
-      responses:
-        "200":
-          description: Default Response
   /v1/products/list:
     get:
       description: Get list of products
@@ -37,6 +21,18 @@ paths:
           required: false
           in: query
           name: size
+        - type: number
+          required: false
+          in: query
+          name: category
+        - type: string
+          required: false
+          in: query
+          name: search
+        - type: boolean
+          required: false
+          in: query
+          name: availability
       responses:
         "200":
           description: Returns list with info about products
@@ -65,3 +61,55 @@ paths:
                       type: string
               total:
                 type: number
+  /v1/categories/list:
+    get:
+      description: Get list of all categories available and the number of available product
+      tags:
+        - categories
+      parameters:
+        - type: number
+          minimum: 0
+          required: false
+          in: query
+          name: page
+        - type: number
+          minimum: 1
+          required: false
+          in: query
+          name: size
+      responses:
+        "200":
+          description: Returns list with info about products
+          schema:
+            description: Returns list with info about products
+            type: object
+            properties:
+              results:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    name:
+                      type: string
+                    productCount:
+                      type: number
+              total:
+                type: number
+  /v1/health:
+    get:
+      description: Get health status
+      tags:
+        - health
+      responses:
+        "200":
+          description: Default Response
+  /v1/dummy:
+    get:
+      description: It's only a dummy route
+      tags:
+        - dummy
+      responses:
+        "200":
+          description: Default Response
