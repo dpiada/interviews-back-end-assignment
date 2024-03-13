@@ -28,6 +28,13 @@ In case multiple requests can be possible use some chaching service for images o
 
 Other this the backend is stateless any information is stored directly into web server so it's easily horizontal scalable
 
+### Challenge #2: Categories and Search
+
+For this challenge I opted for create a new route for retrieving the categories in the response we have (id, name, countProduct).
+
+For accomplishing the sencod requirement *There is also an input that can be used to search for a specific product.* \
+I refactored the route to list all product with filters like `category_id`, `availability` and `search` fields
+
 ## API Documentations
 ---
 [Api Documentation](swagger-api.yaml)
