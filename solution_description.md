@@ -36,6 +36,8 @@ Other this the backend is stateless any information is stored directly into web 
 
 - (fatsify)[https://fastify.dev/]
 - (nope-tap)[https://node-tap.org/]
+- (knex)[https://knexjs.org/]
+- (objection)[https://vincit.github.io/objection.js/]
 - (docker)[https://www.docker.com/]
 
 
