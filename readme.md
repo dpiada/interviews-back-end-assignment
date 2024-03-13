@@ -87,7 +87,7 @@ Update the system to include this information in the whole process.
 
 ## How to run
 
-![Capybara](https://upload.wikimedia.org/wikipedia/commons/3/34/Hydrochoeris_hydrochaeris_in_Brazil_in_Petr%C3%B3polis%2C_Rio_de_Janeiro%2C_Brazil_09.jpg)
+![Capybara](./capybara.jpeg)
 
 ### Requirements
 
