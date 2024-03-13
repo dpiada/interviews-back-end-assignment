@@ -61,6 +61,22 @@ paths:
                       type: string
               total:
                 type: number
+  /v1/health:
+    get:
+      description: Get health status
+      tags:
+        - health
+      responses:
+        "200":
+          description: Default Response
+  /v1/dummy:
+    get:
+      description: It's only a dummy route
+      tags:
+        - dummy
+      responses:
+        "200":
+          description: Default Response
   /v1/categories/list:
     get:
       description: Get list of all categories available and the number of available product
@@ -97,19 +113,3 @@ paths:
                       type: number
               total:
                 type: number
-  /v1/health:
-    get:
-      description: Get health status
-      tags:
-        - health
-      responses:
-        "200":
-          description: Default Response
-  /v1/dummy:
-    get:
-      description: It's only a dummy route
-      tags:
-        - dummy
-      responses:
-        "200":
-          description: Default Response
