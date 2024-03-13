@@ -89,4 +89,63 @@ Update the system to include this information in the whole process.
 
 ![Capybara](https://upload.wikimedia.org/wikipedia/commons/3/34/Hydrochoeris_hydrochaeris_in_Brazil_in_Petr%C3%B3polis%2C_Rio_de_Janeiro%2C_Brazil_09.jpg)
 
-To run 
+### Requirements
+
+- docker >= v20.9.0
+- node.js >= v20.9.0 (If run in local_dev mode)
+
+There 2 mode to run this project:
+
+- **local_dev** 
+
+    This is in autorestart with `nodemon`.
+    It will create `node_modules` in local and use your volume.
+
+    ```
+    npm install
+    cd docker
+    docker compose up --build
+
+    # after the start of container in other window run these commands:
+    
+    cd docker
+    ./script_utils/initial_scripts.sh -m # this command will run the migration
+
+    ./script_utils/initial_scripts.sh -s # this command will run the seeder
+
+    ```
+
+    In `local_dev` it is possible run tests after container it's started
+
+    with command
+
+    `npm run test`
+- **release**
+
+    This mode not use your volume and this is not in auto restart
+
+    ```
+    cd docker
+    docker compose -f docker-compose.release.yml up --build
+
+    # after the start of container in other window run these commands:
+    
+    cd docker
+    ./script_utils/initial_scripts.sh -m # this command will run the migration
+
+    ./script_utils/initial_scripts.sh -s # this command will run the seeder
+
+    ```
+## Description of the solution
+
+- [solution description](./solution_description.md)
+
+## API Documentations
+---
+[Api Documentation](swagger-api.yaml)
+
+## Useful links
+
+- (fatsify)[https://fastify.dev/]
+- (nope-tap)[https://node-tap.org/]
+- (docker)[https://www.docker.com/]
