@@ -5,6 +5,7 @@ const Autoload = require('@fastify/autoload');
 const FastifyJWT = require('@fastify/jwt');
 const FastifyCORS = require('@fastify/cors');
 const FastifySwagger = require('@fastify/swagger');
+const Objection = require('fastify-objectionjs');
 const { schema } = require('../lib/configurations/config');
 const Package = require('../package.json');
 const Category = require('../lib/database/models/category');
@@ -35,7 +36,7 @@ exports.buildFastify = async () => {
   await fastify.register(Autoload, { dir: Path.join(__dirname, '..', 'lib', 'services') });
   await fastify.register(Autoload, { dir: Path.join(__dirname, '..', 'lib', 'routes'), dirNameRoutePrefix: false });
 
-  await fastify.register(require('fastify-objectionjs'), {
+  await fastify.register(Objection, {
     knexConfig,
     models: [Category, Product],
   });

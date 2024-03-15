@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
+/* eslint-disable import/no-extraneous-dependencies */
 const tap = require('tap');
 const knex = require('knex');
 const Ajv = require('ajv');
@@ -37,124 +37,79 @@ tap.test('ProductService - listAllProducts', async (t) => {
   const fastify = await serverTestWrapper();
   try {
     const { productService } = fastify;
+    t.test('Test all list all products without filter', async (t0) => {
+      const page = 0;
+      const size = 5;
 
-    const page = 0;
-    const size = 5;
+      const responseFromQuery = await knexInstance('products')
+        .join('categories', 'products.category_id', '=', 'categories.id')
+        .select(
+          'products.name',
+          'products.price',
+          'products.photo_path as photoPath',
+          'products.quantity',
+          'products.availability',
+          'categories.name as category',
+        ).limit(size)
+        .offset(page);
 
-    const responseFromQuery = await knexInstance('products')
-      .join('categories', 'products.category_id', '=', 'categories.id')
-      .select(
-        'products.name',
-        'products.price',
-        'products.photo_path as photoPath',
-        'products.quantity',
-        'products.availability',
-        'categories.name as category',
-      ).limit(size)
-      .offset(page);
+      const products = await productService.listAllProducts({ page, size });
+      validate(products);
 
-    const products = await productService.listAllProducts({ page, size });
-    validate(products);
+      const { results } = products;
 
-    const { results } = products;
+      t0.equal(responseFromQuery.length, results.length, 'Response length matches size');
 
-    t.equal(responseFromQuery.length, results.length, 'Response length matches size');
+      // eslint-disable-next-line guard-for-in
+      for (const item in results) {
+        const {
+          name, price, photoPath, quantity, availability, category,
+        } = results[item];
+        const {
+          name: nameKnex, price: priceKnex, photoPath: photoPathKnex, quantity: quantityKnex, availability: avKnex, category: catKnex,
+        } = responseFromQuery[item];
+        t0.equal(name, nameKnex);
+        t0.equal(price, priceKnex);
+        t0.equal(photoPath, photoPathKnex);
+        t0.equal(quantity, quantityKnex);
+        t0.equal(availability, avKnex);
+        t0.equal(category, catKnex);
+      }
 
-    for (const item in results) {
-      const {
-        name, price, photoPath, quantity, availability, category,
-      } = results[item];
-      const {
-        name: nameKnex, price: priceKnex, photoPath: photoPathKnex, quantity: quantityKnex, availability: avKnex, category: catKnex,
-      } = responseFromQuery[item];
-      t.equal(name, nameKnex);
-      t.equal(price, priceKnex);
-      t.equal(photoPath, photoPathKnex);
-      t.equal(quantity, quantityKnex);
-      t.equal(availability, avKnex);
-      t.equal(category, catKnex);
-    }
-
-    t.end();
-  } catch (error) {
-    t.fail(`Test failed with error: ${error.message}`);
-  } finally {
-    t.teardown(() => {
-      fastify.close();
-      process.exit(0);
-    });
-  }
-});
-
-tap.test('ProductService - listAllProducts - filtered by category', async (t) => {
-  const fastify = await serverTestWrapper();
-  try {
-    const { productService } = fastify;
-
-    const { id, name: categoryName } = await knexInstance('category').query().first();
-
-    const products = await productService.listAllProducts({ category_id: id });
-    console.log(products);
-    validate(products);
-
-    const { results } = products;
-
-    results.map(({ category }) => {
-      t.equal(category, categoryName);
-    });
-    t.end();
-  } catch (error) {
-    t.fail(`Test failed with error: ${error.message}`);
-  } finally {
-    t.teardown(() => {
-      fastify.close();
-      process.exit(0);
-    });
-  }
-});
-
-tap.test('ProductService - listAllProducts - filtered by availability', async (t) => {
-  const fastify = await serverTestWrapper();
-  try {
-    const { productService } = fastify;
-
-    const products = await productService.listAllProducts({ availability: false });
-    validate(products);
-
-    const { results } = products;
-
-    results.map(({ availability }) => {
-      t.equal(availability, false);
+      t0.end();
     });
 
-    t.end();
-  } catch (error) {
-    t.fail(`Test failed with error: ${error.message}`);
-  } finally {
-    t.teardown(() => {
-      fastify.close();
-      process.exit(0);
-    });
-  }
-});
-
-tap.test('ProductService - listAllProducts - filtered by search', async (t) => {
-  const fastify = await serverTestWrapper();
-  try {
-    const { productService } = fastify;
-
-    const letterSearch = 'a';
-
-    const products = await productService.listAllProducts({ search: letterSearch });
-    validate(products);
-
-    const { results } = products;
-
-    results.map(({ name }) => {
-      t.equal(name.startWith(letterSearch), true);
+    t.test('ProductService - listAllProducts - filtered by category', async (t1) => {
+      const { id, name: categoryName } = await knexInstance('categories').first();
+      const products = await productService.listAllProducts({ categoryId: id });
+      validate(products);
+      const { results } = products;
+      results.forEach(({ category }) => {
+        t1.equal(category, categoryName);
+      });
+      t1.end();
     });
 
-    t.end();
+    t.test('ProductService - listAllProducts - filtered by availability', async (t2) => {
+      const products = await productService.listAllProducts({ availability: false });
+      validate(products);
+      const { results } = products;
+      results.forEach(({ availability }) => {
+        t2.equal(availability, false);
+      });
+      t2.end();
+    });
+
+    t.test('ProductService - listAllProducts - filtered by search', async (t3) => {
+      const letterSearch = 'a';
+      const products = await productService.listAllProducts({ search: letterSearch });
+      validate(products);
+      const { results } = products;
+      results.forEach(({ name }) => {
+        t3.equal(name.startsWith(letterSearch), true);
+      });
+      t3.end();
+    });
   } catch (error) {
     t.fail(`Test failed with error: ${error.message}`);
   } finally {
