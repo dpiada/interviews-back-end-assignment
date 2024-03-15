@@ -14,7 +14,6 @@ testRoute(
       testCallback: ({ response, tap }) => {
         const { statusCode, body } = response;
         tap.equal(statusCode, 200);
-        console.log(body);
         tap.ok(body);
         const { results, total } = JSON.parse(body);
         tap.ok(results);
