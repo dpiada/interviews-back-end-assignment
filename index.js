@@ -11,7 +11,6 @@ try {
     });
 
     await writeApiDoc(fastify);
-
   })();
 } catch (err) {
   console.log(err);

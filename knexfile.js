@@ -1,6 +1,6 @@
-
-
-const { DB_SERVICE, POSTGRES_USER: user, POSTGRES_PASSWORD: password, POSTGRES_DB: database } = process.env;
+const {
+  DB_SERVICE, POSTGRES_USER: user, POSTGRES_PASSWORD: password, POSTGRES_DB: database,
+} = process.env;
 
 if (!DB_SERVICE) {
   throw new Error('Database not defined');

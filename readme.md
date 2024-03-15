@@ -139,14 +139,3 @@ There 2 mode to run this project:
 ## Description of the solution
 
 - [solution description](./solution_description.md)
-
-## API Documentations
----
-
-- [Api Documentation](swagger-api.yaml)
-
-## Useful links
-
-- (fatsify)[https://fastify.dev/]
-- (nope-tap)[https://node-tap.org/]
-- (docker)[https://www.docker.com/]
