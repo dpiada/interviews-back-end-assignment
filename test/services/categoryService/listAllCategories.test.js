@@ -33,40 +33,38 @@ tap.test('categoryService - listAllCategories', async (t) => {
   const fastify = await serverTestWrapper();
   try {
     const { categoryService } = fastify;
-    t.test('Test list all categories', async (t0) => {
-      const page = 0;
-      const size = 5;
+    const page = 0;
+    const size = 5;
 
-      const responseFromQuery = await knexInstance('categories')
-        .join('products', 'products.category_id', '=', 'categories.id')
-        .groupBy('categories.id')
-        .select('categories.*')
-        .count('products.id as productCount')
-        .limit(size)
-        .offset(page);
+    const responseFromQuery = await knexInstance('categories')
+      .join('products', 'products.category_id', '=', 'categories.id')
+      .groupBy('categories.id')
+      .select('categories.*')
+      .count('products.id as productCount')
+      .limit(size)
+      .offset(page);
 
-      const categories = await categoryService.listAllCategories({ page, size });
-      validate(categories);
+    const categories = await categoryService.listAllCategories({ page, size });
+    validate(categories);
 
-      const { results } = categories;
+    const { results } = categories;
 
-      t0.equal(responseFromQuery.length, results.length, 'Response length matches size');
+    t.equal(responseFromQuery.length, results.length, 'Response length matches size');
 
-      // eslint-disable-next-line guard-for-in
-      for (const item in results) {
-        const {
-          name, id, productCount,
-        } = results[item];
-        const {
-          name: nameKnex, id: idKnex, productCount: productCountKnex,
-        } = responseFromQuery[item];
-        t0.equal(name, nameKnex);
-        t0.equal(id, idKnex);
-        t0.equal(productCount, productCountKnex);
-      }
+    // eslint-disable-next-line guard-for-in
+    for (const item in results) {
+      const {
+        name, id, productCount,
+      } = results[item];
+      const {
+        name: nameKnex, id: idKnex, productCount: productCountKnex,
+      } = responseFromQuery[item];
+      t.equal(name, nameKnex);
+      t.equal(id, idKnex);
+      t.equal(productCount, productCountKnex);
+    }
 
-      t0.end();
-    });
+    t.end();
   } catch (error) {
     t.fail(`Test failed with error: ${error.message}`);
   } finally {
